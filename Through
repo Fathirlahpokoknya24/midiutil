@@ -1,0 +1,27 @@
+from midiutil import MIDIFile
+
+# Buat file MIDI
+midi = MIDIFile(1)
+track = 0
+time = 0  # Mulai dari detik 0
+channel = 0
+volume = 100
+midi.addTempo(track, time, 90)  # Set tempo ke 90 BPM
+
+# Melodi solo (D minor pentatonic)
+notes = [
+    (62, 0, 0.5), (65, 0.5, 0.5), (69, 1, 0.5), (74, 1.5, 0.5), (69, 2, 0.5),
+    (65, 2.5, 0.5), (62, 3, 0.5), (65, 3.5, 0.5), (67, 4, 0.5), (69, 4.5, 0.5),
+    (67, 5, 0.5), (65, 5.5, 0.5), (62, 6, 0.5), (65, 6.5, 0.5), (69, 7, 0.5),
+    (74, 7.5, 0.5), (69, 8, 0.5), (65, 8.5, 0.5), (62, 9, 1.0)
+]
+
+# Tambahkan nada ke MIDI
+for pitch, start_time, duration in notes:
+    midi.addNote(track, channel, pitch, start_time, duration, volume)
+
+# Simpan file MIDI
+with open("through_solo.mid", "wb") as output_file:
+    midi.writeFile(output_file)
+
+print("File MIDI berhasil dibuat: through_solo.mid")
